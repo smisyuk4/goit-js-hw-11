@@ -1,25 +1,9 @@
 body {
-    background-color: rgb(196, 201, 201);
+    background-color: rgb(225, 231, 231);
     font-family: 'DM Sans', sans-serif;
 }
 
 .container {
     margin: 0 auto;
     padding: 0 20px;
-}
-
-.footer-title {
-    text-align: center;
-    animation: shake 2s linear alternate infinite;
-}
-
-@keyframes shake {
-    from {
-        transform: translateX(100px);      
-        color: rgb(255, 255, 255);
-    }
-
-    to {
-        transform: translateX(-100px);    
-    }
 }

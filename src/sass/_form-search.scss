@@ -1,9 +1,46 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    z-index: 100;
+    background-image: linear-gradient(rgba(0, 74, 255, 1) 50%, rgb(250, 250, 17) 50%);
+}
+
+main {
+    padding-top: 60px;
+}
+
+.icon-picabay{
+    position: absolute;
+    margin-left: 10px;
+}
+
+.title {
+    position: absolute;
+    top: 10;
+    right: 150;
+    text-align: right;
+    animation: shake 2s linear alternate infinite;
+}
+
+@keyframes shake {
+    from {
+        transform: translateX(100px);
+        color: rgba(0, 74, 255, 1);
+    }
+
+    to {
+        transform: translateX(-100px);
+        color: rgba(250, 250, 17);
+    }
+}
+
 .search-form {
     display: flex;
     justify-content: center;
     padding: 10px 0;
-    margin-bottom: 20px;
-    background-image: linear-gradient(rgba(0, 74, 255, 1) 50%, rgba(213, 214, 4, 1) 50%);
 }
 
 .icon-search{

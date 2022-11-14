@@ -1,19 +1,35 @@
-export default function photoCard() {
+export default function photoCard(photoObj) {
+    const {
+        webformatURL,
+        largeImageURL,
+        tags,
+        likes,
+        views,
+        comments,
+        downloads,
+    } = photoObj
+
     return `<div class="photo-card">
-                <img src="" alt="" loading="lazy" />
-                <div class="info">
-                    <p class="info-item">
-                    <b>Likes</b>
-                    </p>
-                    <p class="info-item">
-                    <b>Views</b>
-                    </p>
-                    <p class="info-item">
-                    <b>Comments</b>
-                    </p>
-                    <p class="info-item">
-                    <b>Downloads</b>
-                    </p>
-                </div>
+                <a href="${largeImageURL}">
+                    <img src="${webformatURL}" alt="${largeImageURL}" loading="lazy" />
+                    <div class="info">
+                        <p class="info-item">
+                        <b>Tags: </b>${tags}
+                        </p>
+                        <p class="info-item">
+                        <b>Likes: </b>${likes}
+                        </p>
+                        <p class="info-item">
+                        <b>Views: </b>${views}
+                        </p>
+                        <p class="info-item">
+                        <b>Comments: </b>${comments}
+                        </p>
+                        <p class="info-item">
+                        <b>Downloads: </b>${downloads}
+                        </p>
+                    </div>
+                </a>                
             </div>`
 }
+
