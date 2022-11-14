@@ -1,0 +1,21 @@
+.search-form {
+    display: flex;
+    justify-content: center;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    background-image: linear-gradient(rgba(0, 74, 255, 1) 50%, rgba(213, 214, 4, 1) 50%);
+}
+
+.icon-search{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-form button {
+    cursor: pointer;
+}
+
+.search-form button:hover{
+    background-color: aquamarine;
+}
