@@ -11,19 +11,27 @@
 
 .gallery {
     display: flex;
-    justify-content: center;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: var(--dst-between);
     margin-bottom: 20px;
 }
 
 .photo-card {
-    width: calc((100% - 10px * (5 - 1)) / 5);
+    --count-cards: 2;
+    width: calc((100% - var(--dst-between) * (var(--count-cards) - 1)) / var(--count-cards));
     padding: 10px;      
-    border: 2px solid black;
-    background-color: aliceblue;
+    border: 2px solid var(--main-color);
+    background-color: var(--third-color);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
             0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+
+    @media screen and (min-width: 768px) {
+        --count-cards: 3;
+    }
+
+    @media screen and (min-width: 1200px) {
+        --count-cards: 5;
+    }
 }
 
 .photo-card a {
@@ -32,10 +40,11 @@
 }
 
 .photo-card img {
-    height: 200px;
-    width: 100%;
+    display: block;
+    max-width: 100%;
+    height: auto;
     object-fit: cover;
-    transition: transform 1s cubic-bezier(0.075, 0.82, 0.165, 1);
+    transition: transform 0.5s var(--animation-regular);
 }
 
 .photo-card img:hover{
@@ -45,16 +54,16 @@
 .load-more {
     width: 100px;
     padding: 5px;
-    border: 1px solid black;
-    color: rgba(250, 250 ,17);
-    background-color: rgba(0, 74, 255, 1);
+    border: 1px solid var(--main-color);
+    color: var(--brand-yellow-color);
+    background-color: var(--brand-blue-color);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
             0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
 }
 
 .load-more:hover {
-    color: rgba(0, 74, 255, 1);
-    background-color: rgba(250, 250, 17);
+    color: var(--brand-blue-color);
+    background-color: var(--brand-yellow-color);
 }
 
 .load-more.hidden{
