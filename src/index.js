@@ -7,33 +7,34 @@ import 'notiflix/dist/notiflix-3.2.5.min.css'
 import photoFetch from "./script/photo-fetch";
 import photoCard from "./template/photo-card";
 
-// const axios = require('axios').default;
-
 const refs = {
     searchForm: document.querySelector('.search-form'),
-    searchInput: document.querySelector('.search-form input'),
     searchBtn: document.querySelector('.search-form button'),
     galleryContainer: document.querySelector('.gallery'),
+    loadMoreBtn: document.querySelector('.load-more'),
 }
 
 refs.searchForm.addEventListener('submit', findPhoto)
+refs.galleryContainer.addEventListener('click', onClickPhoto)
+refs.loadMoreBtn.addEventListener('click', onClickButtonLoadMore)
 
 
 async function findPhoto(event) {
     event.preventDefault()
-    const name = refs.searchInput.value.trim()
+    let searchQuery = event.currentTarget.elements.searchQuery.value
+    searchQuery = searchQuery.trim()
     refs.searchForm.reset()
 
-    if (name.length === 0) {
+    if (searchQuery.length === 0) {
         Notify.failure('No value for search');
         console.log('No value for search')
         return
     }
+
     
     try {
-        const data = await photoFetch(name)
+        const data = await photoFetch(searchQuery)
         const photoArr = data.data.hits
-        console.log(photoArr)
 
         const markup = photoArr.map(item => {
             const photoObj = {
@@ -46,7 +47,6 @@ async function findPhoto(event) {
                 downloads: item.downloads, 
             }
 
-            console.log(photoObj)
             return photoCard(photoObj)
         }).join('')
 
@@ -54,16 +54,11 @@ async function findPhoto(event) {
         refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
         lightbox.refresh()
 
-
     } catch (error) {
         Notify.failure(`${error}`);
     }
     
 }
-
-
-
-refs.galleryContainer.addEventListener('click', onClickPhoto)
 
 const lightbox = new SimpleLightbox(".gallery a", { captionDelay: 250});
 
@@ -73,4 +68,9 @@ function onClickPhoto(event) {
 
 function clearPage() {
     refs.galleryContainer.innerHTML = ''
+}
+
+function onClickButtonLoadMore(event) {
+    event.preventDefault() 
+    console.log('load more')
 }
