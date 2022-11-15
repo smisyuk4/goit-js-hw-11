@@ -32,7 +32,7 @@ async function findPhoto(event) {
     
     try {
         const data = await photoFetch(name)
-        const photoArr = data.hits
+        const photoArr = data.data.hits
         console.log(photoArr)
 
         const markup = photoArr.map(item => {
@@ -52,6 +52,7 @@ async function findPhoto(event) {
 
         clearPage() 
         refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
+        lightbox.refresh()
 
 
     } catch (error) {
