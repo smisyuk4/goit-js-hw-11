@@ -18,11 +18,15 @@ refs.searchForm.addEventListener('submit', findPhoto)
 refs.galleryContainer.addEventListener('click', onClickPhoto)
 refs.loadMoreBtn.addEventListener('click', onClickButtonLoadMore)
 
+let searchQuery = ''
+let numberPage = null
 
 async function findPhoto(event) {
     event.preventDefault()
-    let searchQuery = event.currentTarget.elements.searchQuery.value
+    searchQuery = event.currentTarget.elements.searchQuery.value
     searchQuery = searchQuery.trim()
+    numberPage = 1
+
     refs.searchForm.reset()
 
     if (searchQuery.length === 0) {
@@ -30,13 +34,26 @@ async function findPhoto(event) {
         console.log('No value for search')
         return
     }
-
     
     try {
-        const data = await photoFetch(searchQuery)
-        const photoArr = data.data.hits
+        const data = await photoFetch(searchQuery, numberPage)
+        console.log(data.data)
 
-        const markup = photoArr.map(item => {
+        if (data.data.hits.length === 0) {
+            Notify.failure('Sorry, there are no images matching your search query. Please try again.');
+            console.log('Sorry, there are no images matching your search query. Please try again.')
+        }
+
+        clearPage() 
+        drawMarkup(data) 
+    } catch (error) {
+        Notify.failure(`${error}`);
+    }    
+}
+
+function drawMarkup(data) {
+    const photoArr = data.data.hits
+    const markup = photoArr.map(item => {
             const photoObj = {
                 webformatURL: item.webformatURL,
                 largeImageURL: item.largeImageURL,
@@ -49,15 +66,9 @@ async function findPhoto(event) {
 
             return photoCard(photoObj)
         }).join('')
-
-        clearPage() 
+        
         refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
         lightbox.refresh()
-
-    } catch (error) {
-        Notify.failure(`${error}`);
-    }
-    
 }
 
 const lightbox = new SimpleLightbox(".gallery a", { captionDelay: 250});
@@ -70,7 +81,16 @@ function clearPage() {
     refs.galleryContainer.innerHTML = ''
 }
 
-function onClickButtonLoadMore(event) {
+async function onClickButtonLoadMore(event) {
     event.preventDefault() 
     console.log('load more')
+
+    numberPage += 1
+
+    try {
+        const data = await photoFetch(searchQuery, numberPage)
+        drawMarkup(data) 
+    } catch (error) {
+        Notify.failure(`${error}`);
+    }
 }
