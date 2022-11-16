@@ -11,7 +11,7 @@ export default function photoCard(photoObj) {
 
     return `<div class="photo-card">
                 <a href="${largeImageURL}">
-                    <img src="${webformatURL}" alt="${largeImageURL}" loading="lazy" />
+                    <img src="${webformatURL}" alt="${largeImageURL}" width="208" height="140" loading="lazy" />
                     <div class="info">
                         <p class="info-item">
                         <b>Tags: </b>${tags}

@@ -82,8 +82,8 @@ function drawMarkup(data) {
             return photoCard(photoObj)
         }).join('')
         
-        refs.galleryContainer.insertAdjacentHTML('beforeend', markup)
-        lightbox.refresh()
+    refs.galleryContainer.insertAdjacentHTML('beforeend', markup)    
+    lightbox.refresh()   
 }
 
 const lightbox = new SimpleLightbox(".gallery a", { captionDelay: 250});
@@ -111,7 +111,20 @@ async function onClickButtonLoadMore(event) {
     try {
         const data = await photoFetch(searchQuery, numberPage)
         drawMarkup(data) 
+        slowMotion()
     } catch (error) {
         Notify.failure(`${error}`);
     }
+}
+
+function slowMotion() {
+    const { height: cardHeight } = document.
+        querySelector(".gallery")
+        .firstElementChild
+        .getBoundingClientRect();    
+    //when draw new markup - do one scrol < 2 height card
+    window.scrollBy({
+        top: cardHeight * 1.8,
+        behavior: 'smooth',
+    });    
 }

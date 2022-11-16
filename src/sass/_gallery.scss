@@ -4,16 +4,16 @@
     flex-direction: column;
 }
 
-.gallery p {
-    margin: 0;
-    padding: 0;
-}
-
 .gallery {
     display: flex;
     flex-wrap: wrap;
     gap: var(--dst-between);
     margin-bottom: 20px;
+
+    & p {
+            margin: 0;
+            padding: 0;
+        }
 }
 
 .photo-card {
@@ -32,23 +32,24 @@
     @media screen and (min-width: 1200px) {
         --count-cards: 5;
     }
-}
 
-.photo-card a {
-    text-decoration: none;
-    color: currentColor;
-}
+    & a {
+        text-decoration: none;
+        color: currentColor;
+    }
 
-.photo-card img {
-    display: block;
-    max-width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.5s var(--animation-regular);
-}
+    & img {
+        display: block;
+        margin-bottom: 5px;
+        max-width: 100%;
+        height: auto;
+        object-fit: cover;
+        transition: transform 0.5s var(--animation-regular);
 
-.photo-card img:hover{
-    transform: scale(1.03);
+        &:hover {
+                transform: scale(1.03);
+        }
+    }
 }
 
 .load-more {
@@ -59,13 +60,13 @@
     background-color: var(--brand-blue-color);
     box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
             0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-}
 
-.load-more:hover {
-    color: var(--brand-blue-color);
-    background-color: var(--brand-yellow-color);
-}
+    &:hover {
+            color: var(--brand-blue-color);
+            background-color: var(--brand-yellow-color);
+    }
 
-.load-more.hidden{
-    opacity: 0;
+    &.hidden {
+        opacity: 0;
+    }
 }
